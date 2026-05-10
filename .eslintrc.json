@@ -1,0 +1,7 @@
+{
+  "extends": ["expo", "prettier"],
+  "ignorePatterns": ["node_modules", ".expo", "dist", "web-build", "ios", "android", "coverage"],
+  "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }]
+  }
+}
