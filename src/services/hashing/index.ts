@@ -1,1 +1,1 @@
-export {};
+export { hashTile } from './sha256';
