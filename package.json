@@ -2,7 +2,7 @@
   "name": "atlas-offline",
   "version": "0.1.0",
   "description": "Offline-first cross-platform tactical mapping app (React Native + Web)",
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "private": true,
   "scripts": {
     "start": "expo start",
@@ -14,17 +14,36 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@expo/metro-runtime": "~6.1.2",
+    "@maplibre/maplibre-react-native": "^11.1.1",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~54.0.33",
+    "expo-constants": "~18.0.13",
+    "expo-crypto": "~15.0.9",
+    "expo-dev-client": "~6.0.21",
+    "expo-file-system": "~19.0.22",
+    "expo-linking": "~8.0.12",
+    "expo-router": "~6.0.23",
+    "expo-sqlite": "~16.0.10",
     "expo-status-bar": "~3.0.9",
+    "idb": "^8.0.3",
+    "maplibre-gl": "^5.24.0",
     "react": "19.1.0",
-    "react-native": "0.81.5"
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-tcp-socket": "^6.4.1",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
+    "@types/maplibre-gl": "^1.13.2",
     "@types/react": "~19.1.0",
-    "typescript": "~5.9.2",
     "eslint": "^8.57.1",
     "eslint-config-expo": "~7.1.2",
     "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "typescript": "~5.9.2"
   }
 }
