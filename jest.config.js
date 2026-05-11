@@ -14,5 +14,7 @@ module.exports = {
     '^expo-constants$': '<rootDir>/jest/expo-constants.mock.ts',
     // react-native-tcp-socket is native-only; stub it for the Node test env.
     '^react-native-tcp-socket$': '<rootDir>/jest/react-native-tcp-socket.mock.ts',
+    // AsyncStorage is native-only; in-memory stub for settings tests.
+    '^@react-native-async-storage/async-storage$': '<rootDir>/jest/async-storage.mock.ts',
   },
 };
