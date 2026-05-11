@@ -64,7 +64,9 @@ interface SocketLike {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   on(event: 'data' | 'error' | 'close', cb: (...args: any[]) => void): unknown;
   write(data: Buffer | Uint8Array | string): unknown;
-  end(): unknown;
+  /** Pass the payload to `end()` so write + FIN are queued atomically — avoids
+   *  truncation when `react-native-tcp-socket` flushes on its own schedule. */
+  end(data?: Buffer | Uint8Array | string): unknown;
   destroy(): unknown;
 }
 
@@ -149,8 +151,9 @@ export function buildTileResponseHeader(byteLength: number): string {
 
 function writeTileResponse(socket: SocketLike, data: Uint8Array): void {
   const headerBytes = Buffer.from(buildTileResponseHeader(data.byteLength), 'latin1');
-  socket.write(Buffer.concat([headerBytes, Buffer.from(data)]));
-  socket.end();
+  // Atomic write + FIN — avoids the truncation we were seeing on larger tiles
+  // when `write()` followed by `end()` didn't fully drain before FIN.
+  socket.end(Buffer.concat([headerBytes, Buffer.from(data)]));
 }
 
 export function buildStatusResponse(status: number, statusText: string): Buffer {
@@ -167,6 +170,5 @@ export function buildStatusResponse(status: number, statusText: string): Buffer 
 }
 
 function writeStatus(socket: SocketLike, status: number, statusText: string): void {
-  socket.write(buildStatusResponse(status, statusText));
-  socket.end();
+  socket.end(buildStatusResponse(status, statusText));
 }
