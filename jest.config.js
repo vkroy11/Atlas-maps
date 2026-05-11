@@ -12,5 +12,7 @@ module.exports = {
     // expo-constants ships ESM; supply a tiny mock so tests can import code that
     // reads runtime config without pulling in the full Expo native stack.
     '^expo-constants$': '<rootDir>/jest/expo-constants.mock.ts',
+    // react-native-tcp-socket is native-only; stub it for the Node test env.
+    '^react-native-tcp-socket$': '<rootDir>/jest/react-native-tcp-socket.mock.ts',
   },
 };

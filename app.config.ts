@@ -9,6 +9,7 @@ const config: ExpoConfig = {
   name: 'Atlas Offline',
   slug: 'atlas-offline',
   scheme: 'atlas-offline',
+  owner: 'vkroy218',
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
@@ -39,7 +40,11 @@ const config: ExpoConfig = {
   plugins: ['expo-router', 'expo-sqlite', '@maplibre/maplibre-react-native'],
   extra: {
     maptilerKey: process.env.MAPTILER_KEY ?? '',
+    eas: {
+      projectId: '136cb7a1-5e00-4a6c-9932-0e5a7e0e613d',
+    },
   },
+
 };
 
 export default config;
