@@ -10,12 +10,12 @@ Offline-first cross-platform tactical mapping for Delhi NCR. React Native + Web,
 
 The web build ships with a service worker and Web App Manifest, so https://atlas-maps.vishalkumarroy.xyz/ is installable on phones and desktops. After installation the **entire app**, including the map style, sprite, glyphs, and previously-viewed tiles, runs without a network connection.
 
-| Platform | How to install |
-|---|---|
+| Platform                       | How to install                                                                                                         |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | **Android / Chromium desktop** | Open https://atlas-maps.vishalkumarroy.xyz/, then either tap the install icon in the address bar or `⋮ → Install app`. |
-| **iOS Safari** | Open the URL, tap the **Share** button, choose **Add to Home Screen**. |
-| **Firefox (mobile)** | `⋮ → Install` (Android) or "Add to home screen" prompt. |
-| **Desktop Edge / Chrome** | Address-bar install icon, or `⋮ → Apps → Install this site as an app`. |
+| **iOS Safari**                 | Open the URL, tap the **Share** button, choose **Add to Home Screen**.                                                 |
+| **Firefox (mobile)**           | `⋮ → Install` (Android) or "Add to home screen" prompt.                                                                |
+| **Desktop Edge / Chrome**      | Address-bar install icon, or `⋮ → Apps → Install this site as an app`.                                                 |
 
 After install, launch it from the home screen / app launcher like any native app. The first launch needs network for the initial cache; every subsequent launch works offline.
 
@@ -23,17 +23,17 @@ After install, launch it from the home screen / app launcher like any native app
 
 ## Stack
 
-| Layer | Choice |
-|---|---|
-| App framework | Expo SDK 54, React Native 0.81, React 19, TypeScript 5.9 |
-| Routing | Expo Router (file-based, `app/`) |
-| Map renderer | MapLibre GL JS (web) · `@maplibre/maplibre-react-native` v11 (native) |
-| Tile source | MapTiler — `streets-v2` OpenMapTiles |
-| Storage | SQLite via `expo-sqlite` (native) · IndexedDB via `idb` (web) |
-| Hashing | SHA-256 — `expo-crypto` (native) · Web Crypto (web) |
-| Offline tile protocol | `maplibregl.addProtocol('offline')` (web) · local HTTP server on `127.0.0.1:<random>` (native) |
-| PWA / web offline shell | Custom service worker + Web App Manifest (web only) |
-| Settings persistence | `@react-native-async-storage/async-storage` |
+| Layer                   | Choice                                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| App framework           | Expo SDK 54, React Native 0.81, React 19, TypeScript 5.9                                       |
+| Routing                 | Expo Router (file-based, `app/`)                                                               |
+| Map renderer            | MapLibre GL JS (web) · `@maplibre/maplibre-react-native` v11 (native)                          |
+| Tile source             | MapTiler — `streets-v2` OpenMapTiles                                                           |
+| Storage                 | SQLite via `expo-sqlite` (native) · IndexedDB via `idb` (web)                                  |
+| Hashing                 | SHA-256 — `expo-crypto` (native) · Web Crypto (web)                                            |
+| Offline tile protocol   | `maplibregl.addProtocol('offline')` (web) · local HTTP server on `127.0.0.1:<random>` (native) |
+| PWA / web offline shell | Custom service worker + Web App Manifest (web only)                                            |
+| Settings persistence    | `@react-native-async-storage/async-storage`                                                    |
 
 ## Architecture
 
@@ -155,6 +155,7 @@ First visit (online)          Every subsequent visit (online OR offline)
 ```
 
 Three layered caches:
+
 1. `atlas-shell-v1` — HTML, manifest, top-level navigations.
 2. `atlas-assets-v1` — JS / CSS / images at the same origin.
 3. `atlas-maptiler-v1` — MapTiler style JSON, sprite, glyphs.
@@ -179,22 +180,22 @@ cp .env.example .env    # set MAPTILER_KEY=<your-key>
 
 ## Run
 
-| Target | Command | Notes |
-|---|---|---|
-| **Web (dev)** | `npm run web` | Opens http://localhost:8081 — fastest dev loop |
-| **Web (production bundle)** | `npm run build:web` | Writes static SPA into `dist/` with PWA bits injected; serve with any static host |
-| **Native dev client (local)** | `npx expo run:ios` / `run:android` | First build is slow (10–20 min); then `npx expo start --dev-client` for live reload |
-| **Native dev client (EAS)** | `eas build --profile development --platform android` | Cloud build; needs `eas secret:create --name MAPTILER_KEY --value <key>` first |
-| **Tests** | `npm test` | Jest, 64+ unit tests |
-| **Typecheck** | `npm run typecheck` | |
-| **Lint / format** | `npm run lint` / `npm run format` | |
-| **Regenerate icons** | `npm run icons` | Reads `scripts/generate-icons.mjs`, writes PNGs into `assets/` and `public/` |
+| Target                        | Command                                              | Notes                                                                               |
+| ----------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Web (dev)**                 | `npm run web`                                        | Opens http://localhost:8081 — fastest dev loop                                      |
+| **Web (production bundle)**   | `npm run build:web`                                  | Writes static SPA into `dist/` with PWA bits injected; serve with any static host   |
+| **Native dev client (local)** | `npx expo run:ios` / `run:android`                   | First build is slow (10–20 min); then `npx expo start --dev-client` for live reload |
+| **Native dev client (EAS)**   | `eas build --profile development --platform android` | Cloud build; needs `eas secret:create --name MAPTILER_KEY --value <key>` first      |
+| **Tests**                     | `npm test`                                           | Jest, 64+ unit tests                                                                |
+| **Typecheck**                 | `npm run typecheck`                                  |                                                                                     |
+| **Lint / format**             | `npm run lint` / `npm run format`                    |                                                                                     |
+| **Regenerate icons**          | `npm run icons`                                      | Reads `scripts/generate-icons.mjs`, writes PNGs into `assets/` and `public/`        |
 
 ## Deploy the web build
 
 `npm run build:web` produces a static SPA under `dist/`. Drop it on any static host (Vercel, Netlify, Cloudflare Pages, S3 + CloudFront, etc.).
 
-The author's deployment lives at https://atlas-maps.vishalkumarroy.xyz/ on Vercel.
+My current deployment lives at https://atlas-maps.vishalkumarroy.xyz/ on Vercel.
 
 Vercel project settings:
 
@@ -276,6 +277,7 @@ In `app.config.ts` and `src/utils/tileMath.ts`:
 - `extra.maptilerKey` — pulled from `process.env.MAPTILER_KEY` at config-eval time
 
 Prefetch defaults in `src/services/prefetch/settings.ts`:
+
 - `enabled: true`
 - `radius: 1` (3×3 neighbors per move)
 - `concurrency: 4`
