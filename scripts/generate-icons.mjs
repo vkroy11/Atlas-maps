@@ -15,6 +15,7 @@ import sharp from 'sharp';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const assetsDir = resolve(here, '..', 'assets');
+const publicDir = resolve(here, '..', 'public');
 
 const BG = '#0a0f0d';
 const FG = '#7fa67a';
@@ -154,10 +155,19 @@ async function render(svg, outPath, opts = {}) {
 }
 
 async function main() {
+  // Native (Expo) — referenced from app.config.ts
   await render(fullIcon(1024), resolve(assetsDir, 'icon.png'));
   await render(adaptiveForeground(1024), resolve(assetsDir, 'adaptive-icon.png'));
   await render(splashMark(1024), resolve(assetsDir, 'splash-icon.png'));
   await render(fullIcon(192), resolve(assetsDir, 'favicon.png'), { size: 48 });
+
+  // Web PWA — referenced from public/manifest.json
+  await render(fullIcon(512), resolve(publicDir, 'icon-512.png'));
+  await render(fullIcon(384), resolve(publicDir, 'icon-192.png'), { size: 192 });
+  // Maskable: Android crops to a circle/squircle; ensure the brand sits inside
+  // the inner 60% safe area. `adaptiveForeground` already does that for us.
+  await render(adaptiveForeground(512), resolve(publicDir, 'icon-maskable-512.png'));
+  await render(fullIcon(360), resolve(publicDir, 'apple-touch-icon.png'), { size: 180 });
 }
 
 main().catch((err) => {
