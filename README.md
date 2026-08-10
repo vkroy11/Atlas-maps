@@ -2,6 +2,8 @@
 
 Offline-first cross-platform tactical mapping for Delhi NCR. React Native + Web, vector tiles, persistent storage, SHA-256 dedup, predictive prefetching, installable PWA.
 
+**Android App** https://drive.google.com/drive/folders/12Qv9olWBZPfmuWrlhBAwYjmDR0tsQpoZ?usp=sharing
+
 **Live:** https://atlas-maps.vishalkumarroy.xyz/
 
 > Once you've viewed a region online, it stays available offline — same zoom, same clarity, forever.
